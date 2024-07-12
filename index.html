@@ -313,14 +313,6 @@
             document.getElementById('popup').style.display = 'flex';
         });
 
-        // Functionality to toggle display of contact cards
-        document.getElementById('toggleCardsBtn').addEventListener('click', function() {
-            var cards = document.querySelectorAll('.card');
-            cards.forEach(function(card) {
-                card.classList.toggle('show');
-            });
-        });
-
         // Functionality to close the popup
         document.getElementById('closePopup').addEventListener('click', function() {
             document.getElementById('popup').style.display = 'none';
