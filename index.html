@@ -254,8 +254,8 @@
                 <button type="submit">Submit</button>
             </div>
         </form>
-        <!-- Button to toggle display of contact cards -->
-        <button id="toggleCardsBtn">Show Contact Cards</button>
+        <!-- Button to toggle display of contact cards 
+        <button id="toggleCardsBtn">Show Contact Cards</button>-->
     </div>
 
     <!-- Contact Cards Section -->
@@ -302,6 +302,12 @@
     </div>
 
     <script>
+        // Prevent pasting into the answer textarea
+        document.getElementById('answer').addEventListener('paste', function(e) {
+            e.preventDefault();
+            alert('Pasting is not allowed in this field.');
+        });
+
         // Function to show the popup on page load
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('popup').style.display = 'flex';
