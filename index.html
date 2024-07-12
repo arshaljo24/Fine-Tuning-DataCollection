@@ -236,6 +236,10 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .contact-card-spacing {
+            height: 50px; /* Adjust as needed */
+        }
+
     </style>
     <!-- Add icon library for contact cards -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -259,46 +263,76 @@
             </div>
             <div class="form-group">
                 <label for="question">Question:</label>
-                <textarea id="question" class="form-data" name="question" rows="4" required></textarea>
+                <textarea id="question" class="form-data" name="question" rows="4" placeholder="Please enter a question related to your field of expertise or interest" required></textarea>
             </div>
             <div class="form-group">
                 <label for="answer">Answer:</label>
-                <textarea id="answer" class="form-data" name="answer" rows="4" required></textarea>
+                <textarea id="answer" class="form-data" name="answer" rows="4" placeholder="Please provide your answer to the question you've entered above." required></textarea>
+                <p class="privacy-statement">By submitting this form, you agree to our <a href="#" id="privacy-link">privacy statement</a>.</p>
             </div>
             <div class="form-group">
                 <button type="submit">Submit</button>
             </div>
+            <div class="form-group">
+                <button id="meetTeamBtn">Meet the Team</button>
+            </div>
         </form>
     </div>
 
-    <!-- Contact Cards Section -->
-    <div class="contact-cards">
-        <div class="card">
-            <img src="img1.jpg" alt="John" style="width:100%">
-            <h1>John Doe</h1>
-            <p class="title">CEO & Founder, Example Inc.</p>
-            <p>Harvard University</p>
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <p><button>Contact</button></p>
-        </div>
+<!-- Contact Cards Popup -->
+<div id="contact-cards-popup" class="popup">
+    <div class="popup-content">
+        <!-- Popup content goes here -->
+        <div class="contact-cards">
+            <!-- Sample contact cards -->
+            <div class="contact-card">
+                <div class="contact-info" style="padding-left: 50px;">
+                    <div class="contact-photo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgznJwXXnd-nmVoxRp2NLjRW46I3_ZEtMYsw&s" alt="Contact Photo" width="200" height="200">
+                    </div>
+                    <div class="contact-details">
+                        <h3 style="font-weight: bold;">AMAL JOSEPH</h3>
+                        <p>amal.joseph@btech.christuniversity.in</p>
+                        <p>+91 70258 57580</p>
+                        <!-- Social media icons with links -->
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/amaljosepph/" target="_blank" class="social-icon"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/amal-joseph-shaji/" target="_blank" class="social-icon"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
 
-        <div class="card">
-            <img src="img2.jpg" alt="Jane" style="width:100%">
-            <h1>Jane Smith</h1>
-            <p class="title">COO, Example Inc.</p>
-            <p>Stanford University</p>
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <p><button>Contact</button></p>
-        </div>
+            <!-- Add space between contact cards -->
+            <div class="contact-card-spacing"></div>
 
-        <!-- Additional cards can be added as needed -->
+            <div class="contact-card">
+                <div class="contact-info" style="padding-left: 50px;">
+                    <div class="contact-photo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKppR6PkwuyU_yk612XPjW6z8dDrIKNSypww&s" alt="Contact Photo" width="200" height="200">
+                    </div>
+                    <div class="contact-details">
+                        <h3 style="font-weight: bold;">ARSHAL JO</h3>
+                        <p>arshal.jo@btech.christuniversity.in</p>
+                        <p>+91 85904 14704</p>
+                        <!-- Social media icons with links -->
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/arshal.jo" target="_blank" class="social-icon"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/arshal-jo" target="_blank" class="social-icon"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Close button -->
+        <button class="close-btn" onclick="closeContactCardsPopup()">Close</button>
     </div>
+</div>
+
+
+
 
     <!-- Popup on page load -->
     <div class="popup" id="popup">
@@ -329,10 +363,46 @@
     </div>
 </div>
 
+<!-- Popup for Privacy Statement -->
+<div id="privacy-popup" class="popup">
+    <div class="popup-content" style="text-align: justify;">
+        <h3>Privacy Notice</h3>
+        <p>Thank you for participating in our form. Your privacy is important to us. Here’s how we handle your information:</p>
+        <p><strong>Name, Email, Phone Number:</strong> We collect these details solely to ensure the quality of responses and track participant values. Your contact information will not be shared or used for marketing purposes.</p>
+        <p><strong>Question and Answer:</strong> These are collected to fine-tune our Language Model (LLM) to provide better responses. Fine-tuning helps us improve accuracy and effectiveness in our project.</p>
+        <p><strong>Why fine-tuning is important for our project:</strong> Fine-tuning allows us to enhance the performance of our Language Model by incorporating diverse input and improving response quality. Your contributions help us achieve more precise and tailored results.</p>
+        <p>Your data will be securely stored and processed in compliance with data protection laws. By submitting this form, you consent to the collection and processing of your personal data as described above. If you have any questions or concerns about how your data is handled, please contact us at <a href="mailto:arshal.jo@btech.christuniversity.in">arshal.jo@btech.christuniversity.in</a></p>
+        <button onclick="closePrivacyPopup()" style="display: block; margin: 0 auto;">Close</button>
+    </div>
+</div>
+
 <!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+    // Function to open contact cards popup
+document.getElementById('meetTeamBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('contact-cards-popup').style.display = 'flex';
+});
+
+// Function to close contact cards popup
+function closeContactCardsPopup() {
+    document.getElementById('contact-cards-popup').style.display = 'none';
+}
+
+
+    // Functionality to open privacy statement popup
+document.getElementById('privacy-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('privacy-popup').style.display = 'flex';
+});
+
+// Functionality to close privacy statement popup
+function closePrivacyPopup() {
+    document.getElementById('privacy-popup').style.display = 'none';
+}
+
     $("#basicForm").submit(function(e) {
         e.preventDefault();
         document.getElementById("submit-popup").style.display = "flex";
