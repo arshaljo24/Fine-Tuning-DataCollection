@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Voice Matters: Help Us Improve AI Fairness!</title>
+    <title>AI Fairness Enhancement Survey</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -239,6 +239,22 @@
         .contact-card-spacing {
             height: 50px; /* Adjust as needed */
         }
+        .popup-content {
+            position: relative; /* Ensure relative positioning for absolute positioning of close icon */
+        }
+
+        .close-icon {
+            position: absolute;
+            top: 10px; /* Adjust top position as needed */
+            right: 10px; /* Adjust right position as needed */
+            color: #333; /* Adjusted color for better visibility */
+            font-size: 24px; /* Adjusted font size for the icon */
+        }
+
+        .close-icon:hover {
+            color: #555; /* Darker color on hover for contrast */
+        }
+
 
     </style>
     <!-- Add icon library for contact cards -->
@@ -247,7 +263,7 @@
 <body>
     <!-- Form container -->
     <div class="form-container">
-        <h2>Your Voice Matters: Help Us Improve AI Fairness!</h2>
+        <h2>AI Fairness Enhancement Survey</h2>
         <form id="basicForm" method="post" action="https://script.google.com/macros/s/AKfycbzcUOQIEOfdg9byncHNpinySt5QSIKwAUXnYPJ-jAqwpLKtb5NeeTiVFAqzmqLvJfQ4Bg/exec">
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -282,6 +298,11 @@
 <!-- Contact Cards Popup -->
 <div id="contact-cards-popup" class="popup">
     <div class="popup-content">
+        <!-- Close icon -->
+        <a href="#" class="close-icon" onclick="closeContactCardsPopup()">
+            <i class="fa fa-times fa-2x"></i> <!-- Adjusted size with fa-2x class -->
+        </a>
+        
         <!-- Popup content goes here -->
         <div class="contact-cards">
             <!-- Sample contact cards -->
@@ -326,11 +347,9 @@
                 
             </div>
         </div>
-        <!-- Close button -->
-         <br>
-        <button class="close-btn" onclick="closeContactCardsPopup()" style="width: 100%;">Close</button>
     </div>
 </div>
+
 
 
 
