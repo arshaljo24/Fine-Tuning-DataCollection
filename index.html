@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Voice Matters: Help Us Improve AI Fairness!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #226b80, #35b0ab);
+            animation: gradientAnimation 10s ease infinite alternate;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background: linear-gradient(135deg, #226b80, #35b0ab);
+            }
+            100% {
+                background: linear-gradient(135deg, #35b0ab, #226b80);
+            }
+        }
+
+        /* Form container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 20px; /* Space below the form */
+        }
+
+        .form-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ffffff; /* Initial border color */
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #35b0ab; /* Focus border color */
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 15px;
+            background-color: #35b0ab;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background-color: #226b80;
+        }
+
+        h2 {
+            color: #35b0ab;
+            margin-bottom: 20px;
+        }
+
+        /* Button to toggle contact cards */
+        #toggleCardsBtn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #35b0ab;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        #toggleCardsBtn:hover {
+            background-color: #226b80;
+        }
+
+        /* Contact Cards Section */
+        .contact-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: calc(50% - 20px); /* Two cards per row with margins */
+            margin: 10px;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            display: none; /* Initially hidden */
+        }
+
+        .card.show {
+            display: block; /* Display when shown */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 50%;
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            color: grey;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+            }
+
+            .card {
+                width: 100%; /* Full width cards on smaller screens */
+                margin: 10px 0;
+            }
+        }
+
+        /* Popup styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            margin: auto;
+        }
+
+        .popup h3 {
+            color: #35b0ab;
+            margin-bottom: 10px;
+        }
+
+        .popup p {
+            margin-bottom: 20px;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            background-color: #35b0ab;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup button:hover {
+            background-color: #226b80;
+        }
+    </style>
+    <!-- Add icon library for contact cards -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Form container -->
+    <div class="form-container">
+        <h2>Your Voice Matters: Help Us Improve AI Fairness!</h2>
+        <form id="basicForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <textarea id="question" name="question" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="answer">Answer:</label>
+                <textarea id="answer" name="answer" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        <!-- Button to toggle display of contact cards -->
+        <button id="toggleCardsBtn">Show Contact Cards</button>
+    </div>
+
+    <!-- Contact Cards Section -->
+    <div class="contact-cards">
+        <div class="card">
+            <img src="img1.jpg" alt="John" style="width:100%">
+            <h1>John Doe</h1>
+            <p class="title">CEO & Founder, Example Inc.</p>
+            <p>Harvard University</p>
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <p><button>Contact</button></p>
+        </div>
+
+        <div class="card">
+            <img src="img2.jpg" alt="Jane" style="width:100%">
+            <h1>Jane Smith</h1>
+            <p class="title">COO, Example Inc.</p>
+            <p>Stanford University</p>
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <p><button>Contact</button></p>
+        </div>
+
+        <!-- Additional cards can be added as needed -->
+    </div>
+
+    <!-- Popup on page load -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h3>Dear Participants,</h3>
+            <p>Thank you for participating in our form to contribute to our research on AI model fairness. To ensure the accuracy and integrity of our data, please follow these guidelines when entering your questions and answers:</p>
+            <p><strong>Enter Original Content:</strong> Please type your questions and responses directly into the form fields. Avoid copying and pasting from other sources to maintain authenticity.</p>
+            <p><strong>Avoid Personal Information:</strong> Ensure that questions and answers do not include any personal details such as names, addresses, phone numbers, or any other identifying information.</p>
+            <p><strong>Data Integrity:</strong> We value your input and aim to collect data that accurately represents diverse linguistic and cultural backgrounds. Your contributions are crucial in achieving fair evaluations.</p>
+            <p>If you encounter any difficulties or have suggestions, please feel free to reach out to us. Thank you for your cooperation in advancing fairness in AI.</p>
+            <p><em>Best regards,</em><br>Amal Joseph Shaji & Arshal Jo</p>
+            <button id="closePopup">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to show the popup on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('popup').style.display = 'flex';
+        });
+
+        // Functionality to toggle display of contact cards
+        document.getElementById('toggleCardsBtn').addEventListener('click', function() {
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function(card) {
+                card.classList.toggle('show');
+            });
+        });
+
+        // Functionality to close the popup
+        document.getElementById('closePopup').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        // Functionality to handle form submission
+        document.getElementById('basicForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // You can handle form submission here, such as sending data to a server
+
+            // For demonstration, alert is used
+            alert('Form submitted successfully!');
+            // You can also reset the form if needed
+            // document.getElementById('basicForm').reset();
+        });
+    </script>
+</body>
+</html>
