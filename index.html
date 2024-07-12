@@ -221,6 +221,21 @@
         .popup button:hover {
             background-color: #226b80;
         }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #35b0ab;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
     <!-- Add icon library for contact cards -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -229,33 +244,31 @@
     <!-- Form container -->
     <div class="form-container">
         <h2>Your Voice Matters: Help Us Improve AI Fairness!</h2>
-        <form id="basicForm">
+        <form id="basicForm" method="post" action="https://script.google.com/macros/s/AKfycbzcUOQIEOfdg9byncHNpinySt5QSIKwAUXnYPJ-jAqwpLKtb5NeeTiVFAqzmqLvJfQ4Bg/exec">
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" class="form-data" name="name" required>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" class="form-data" name="email" required>
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" required>
+                <input type="tel" id="phone" class="form-data" name="phone" required>
             </div>
             <div class="form-group">
                 <label for="question">Question:</label>
-                <textarea id="question" name="question" rows="4" required></textarea>
+                <textarea id="question" class="form-data" name="question" rows="4" required></textarea>
             </div>
             <div class="form-group">
                 <label for="answer">Answer:</label>
-                <textarea id="answer" name="answer" rows="4" required></textarea>
+                <textarea id="answer" class="form-data" name="answer" rows="4" required></textarea>
             </div>
             <div class="form-group">
                 <button type="submit">Submit</button>
             </div>
         </form>
-        <!-- Button to toggle display of contact cards 
-        <button id="toggleCardsBtn">Show Contact Cards</button>-->
     </div>
 
     <!-- Contact Cards Section -->
@@ -301,8 +314,53 @@
         </div>
     </div>
 
-    <script>
-        // Prevent pasting into the answer textarea
+    <!-- Popup for form submission -->
+<div id="submit-popup" class="popup">
+    <div class="popup-content">
+        <div id="loading-spinner" style="display: none;">
+            <p>Submitting...</p>
+            <div class="spinner"></div>
+        </div>
+        <div id="success-message" style="display: none;">
+            <h3>Thank you for your submission!</h3>
+            <p>Your responses will help us create a more fair and inclusive AI system. Remember, your feedback is making a difference!</p>
+            <button onclick="closeSubmitPopup()">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $("#basicForm").submit(function(e) {
+        e.preventDefault();
+        document.getElementById("submit-popup").style.display = "flex";
+        document.getElementById("loading-spinner").style.display = "block";
+        document.getElementById("success-message").style.display = "none";
+        
+        $.ajax({
+            url: "https://script.google.com/macros/s/AKfycbzcUOQIEOfdg9byncHNpinySt5QSIKwAUXnYPJ-jAqwpLKtb5NeeTiVFAqzmqLvJfQ4Bg/exec",
+            data: $("#basicForm").serialize(),
+            method: "post",
+            success: function(response) {
+                document.getElementById("loading-spinner").style.display = "none";
+                document.getElementById("success-message").style.display = "block";
+            },
+            error: function(err) {
+                alert("Something went wrong");
+                document.getElementById("submit-popup").style.display = "none";
+            }
+        });
+    });
+
+    function closeSubmitPopup() {
+        document.getElementById("submit-popup").style.display = "none";
+        // Reload the page after closing the popup
+        location.reload();
+    }
+
+       // Prevent pasting into the answer textarea
         document.getElementById('answer').addEventListener('paste', function(e) {
             e.preventDefault();
             alert('Pasting is not allowed in this field.');
@@ -317,18 +375,8 @@
         document.getElementById('closePopup').addEventListener('click', function() {
             document.getElementById('popup').style.display = 'none';
         });
+        
 
-        // Functionality to handle form submission
-        document.getElementById('basicForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // You can handle form submission here, such as sending data to a server
-
-            // For demonstration, alert is used
-            alert('Form submitted successfully!');
-            // You can also reset the form if needed
-            // document.getElementById('basicForm').reset();
-        });
     </script>
 </body>
 </html>
